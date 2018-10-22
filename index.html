@@ -1,0 +1,311 @@
+
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Obedove Menu | Obchodna</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css'>
+
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>    
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+  
+  <style>
+  	* {
+  		font-family: 'Roboto', sans-serif !important;
+  	}
+  	
+  	body {
+  		margin-bottom: 3em;
+  		background-color: #eee;
+  	}
+  	
+  	h1 {
+  		font-weight: 100;
+  		color: #1f4c59;
+  	}
+  	
+  	h2 {
+  		text-align: center;
+  		font-weight: 900;
+  		color: #8e44ad;
+  		font-size: 1.4em;
+  		margin-top: 0;
+  		padding-top: 0;
+  	}
+  	
+  	h2 > a {
+  		color: #00b39f!important;
+  		text-decoration: underline;
+  	}
+  	  	
+  	.menu-box .loading {  
+  		height: 48px;		
+  		display: block;
+  		margin: 100px auto;
+  	}
+  	
+  	.menu-box iframe {
+  		width: 100%;
+  		border: 0;
+  		display: none;
+  	}
+  	
+  	.menu-box .box * {
+  		color: black !important;
+  		font-size: 16px !important;
+  		font-weight: normal !important;
+  	}
+  	
+  	.menu-box .box h2.webcrunch {
+  		text-align: center!important;
+  		font-weight: 900!important;
+  		color: #8e44ad!important;
+  		font-size: 1.4em!important;
+  		margin-top: 0!important;
+  		padding-top: 0!important;
+  	}
+  	
+  	.menu-box .box h2.webcrunch > a {
+  		color: #00b39f!important;
+  		text-decoration: underline;
+  		font-weight: 700!important;
+  		text-transform: uppercase;
+        text-decoration: none;
+        margin-bottom: 30px;
+        display: block;
+        margin-top: 20px;
+  	}
+  	
+  	#menus-top {
+  		padding-top: 10px;
+  	}
+  	
+  	#menus-row {
+  		background-color: white;
+  		overflow: hidden;
+  	}
+  	
+  	.well {
+  		border: none;
+    	background-color: #fff;
+    	position: relative;
+  	}
+  	
+  	.well:after {
+  		content: '';
+  		position: absolute;
+  		right: 0;
+  		top: 0;
+  		height: 100000px;
+  		background-color: #e2e2e2;
+  		width: 1px;
+  	}
+  	
+  	.clearer-box {  	
+  		border-top: 1px solid #e2e2e2;
+  	}
+
+
+  	.menu-box.loaded iframe {
+  		display: block;
+  	}
+  	
+  	.menu-box.loaded .loading {
+  		display: none;
+  	}
+  	
+  	[removeme] {
+  		display: none !important;
+  	}
+  	
+  	.restaurant-image {
+  		max-width: 100%;
+  		max-height: 280px;
+  		display: block;
+  		margin: 20px auto 0 auto;
+  		border-radius: 50%;
+    	border: 5px solid #fff;
+    	box-shadow: 0 0 8px 0 rgba(0,0,0,.25);
+  	}
+  </style>
+  
+  <script>
+  	var dailyMenus = [
+		{
+			"name": "Pulitzer",
+			"url": "http://www.pulitzer.sk/sk/menu/dnesne-obedove-menu?tmpl=component&print=1",
+			"toRemove": [".pm-header", "#phocamenuicons", ".pm-footer"],
+			"picture": "pulitzer1.png"
+		},
+		{
+			"name": "Pulitzer u Zlateho Jelena",
+			"url": "http://www.pulitzeruzlatehojelena.sk/menu/dnesne-obedove-menu?tmpl=component&print=1",
+			"mainElement": "#phocarestaurantmenu",
+			"picture": "pulitzer2.jpg"
+		},
+		{
+			"name": "Le Petit",
+			"url": "https://menucka.sk/denne-menu/bratislava/le-petit-caffe-bar-food",
+			"toRemove": [".col-xs-9.col-sm-9", ".col-xs-3.col-sm-3", ".img-responsive"],
+			"mainElement": "#restaurant",
+			"picture": "le-petit.jpg"
+		},		
+		{
+			"name": "Milenium Cafe",
+			"url": "http://restauracie.sme.sk/restauracia/milenium-cafe_1725-stare-mesto_2949/denne-menu",
+			"mainElement": ".dnesne_menu",
+			"picture": "cafe-milenium.jpg"
+		},
+		{
+			"name": "Stefanka by Pulitzer",
+			"url": "https://www.stefankabypulitzer.sk/menu/obedove-menu-na-dnes",
+			"toRemove": [".pm-header", ".pm-footer"],
+			"mainElement": "#phocamenu",
+			"picture": "pulitzer3.jpg"
+		},
+		{
+			"name": "Bratislavsky mestiansky pivovar",
+			"url": "http://www.mestianskypivovar.sk/ponuka-dna-jedlo-dna-restauracia-pivaren-bratislava",
+			"mainElement": ".rightFoodList",
+			"picture": "bratislavsky-mestiansky.png"
+		},
+		{
+			"name": "BeAbout",
+			"url": "http://restauracie.sme.sk/restauracia/beabout_3914-stare-mesto_2949/denne-menu",
+			"mainElement": ".dnesne_menu",
+			"picture": "beabout.png"
+		},
+		{
+			"name": "U Zlatého Bažanta",
+			"url": "http://restauracie.sme.sk/restauracia/u-zlateho-bazanta_6558-stare-mesto_2949/denne-menu",
+			"mainElement": ".dnesne_menu",
+			"picture": "u-zlateho-bazanta.png"
+		},
+		{
+			"name": "Pub u Zeleneho Stromu",
+			"url": "http://uzelenehostromu.sk/",
+			"toRemove": ["#newsletter"],
+			"mainElement": "#main",
+			"picture": "pub-u-zeleneho-stromu.png"
+		},
+		{
+			"name": "City Vegetarian",
+			"url": "http://restauracie.sme.sk/restauracia/city-vegetarian_625-stare-mesto_2949/denne-menu",
+			"mainElement": ".dnesne_menu",
+			"picture": "city-vegetarian.png"
+		},
+		{
+			"name": "Flagship - Bratislavska restauracia",
+			"url": "http://menucka.sk/denne-menu/bratislava/bratislavska-restauracia-bratislava-flagship-restaurant",
+			"mainElement": "#restaurant",
+			"picture": "flagship.png"
+		},
+//		{
+//			"name": "Pizzeria Bella Napoli",
+//			"url": "http://menucka.sk/denne-menu/bratislava/bella-napoli-drevena",
+//			"mainElement": "#restaurant",
+//			"picture": "bella-napoli.png"
+//		},
+//		{
+//			"name": "Gastro U Jakuba",
+//			"url": "http://restauracie.sme.sk/restauracia/gastro-u-jakuba-bratislava_4707-bratislava_2983/denne-menu",
+//			"mainElement": ".dnesne_menu",
+//			"picture": "u-jakuba.jpeg"
+//		}
+  	];
+  	
+  	$(function() {
+  		var counter = 0;
+		dailyMenus.forEach(function(dailyMenu) {
+  			var top = $("<div class='col-lg-3 menu-box well' />");
+  			
+  			jQuery.get("http://obedovat.webcrunch.sk/get_page.php?url=" + dailyMenu.url, function(result) {
+  				var el = document.createElement('html');
+  				result = result.replace(new RegExp('<script', 'g'), '<span removeme');
+  				result = result.replace(new RegExp('<link', 'g'), '<span');
+  				result = result.replace(new RegExp('<style', 'g'), '<span');
+  				result = result.replace(new RegExp('<img', 'g'), '<span');
+  				result = result.replace(new RegExp('<video', 'g'), '<span');
+  				
+				el.innerHTML = result;
+				
+				el = jQuery(el);
+				
+				el.find("style,link,script,img,video").remove();
+				
+				if (dailyMenu.mainElement && el.find(dailyMenu.mainElement).length === 1) {
+	       			var mainElement = el.find(dailyMenu.mainElement).clone();
+	       			el.find("body").html("").append(mainElement);
+	       		}
+
+	        	if (dailyMenu.toRemove) {        			        dailyMenu.toRemove.forEach(function(selector) {
+		        		el.find(selector).remove();
+		        	});
+	        	}
+	        		        	
+	        	top.addClass("loaded");	
+	        	
+	        	var b = jQuery('<div/>');
+	        	b.html(el.find('body').html());
+	        	var b = top.find('.box').append(b);      	       		
+  			});
+	        
+	        var loading = $("<img class='loading' />");
+	        loading.attr("src", "01-progress.gif");
+  			  		
+	  		var title = $("<h2/>");
+	  		title.addClass('webcrunch');
+	  		title.attr('id', 'anchor-' + counter);
+	  		var titleAnchor = $("<a/>");
+	  		titleAnchor.attr("href", dailyMenu.url);
+	  		titleAnchor.attr("target", "_blank");
+	  		titleAnchor.html(dailyMenu.name);
+	  		title.append(titleAnchor);
+  	  			
+  			var topBox = $("<div class='box' />");
+  			var imageBox = $("<div class='col-sm-4' />");
+  			
+  			topBox.append(title, loading);
+  			
+  			top.append(topBox);
+  			
+	  		$("#menus-row").append(top);
+	  		
+	  		var quickLink = $('<a/>');
+	  		quickLink.text(dailyMenu.name);
+	  		quickLink.addClass('btn btn-default');
+	  		quickLink.attr('href', '#anchor-' + counter);
+	  		
+//	  		$("#quick-links").append(quickLink)	  		
+	  		counter++;
+	  		
+	  		if (counter % 4 === 0) {
+		  		$("#menus-row").append($("<div class='col-xs-12 clearer-box' />"));	
+	  		}
+  		});
+  	});  		
+  </script>
+</head>
+
+<body>
+  <h1 class="text-center">Obedove Menu - Obchodna</h1>
+
+  <div class="container-fluid">  
+	  <div class="btn-group" id="quick-links">
+  
+	  </div>
+  </div>
+  
+  <div class="container-fluid" id="menus-top">
+	  <div id="menus-row" class="row">
+		<!-- menus are appedned here from js -->    
+	  </div>
+  </div>
+</body>
+</html>
